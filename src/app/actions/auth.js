@@ -29,13 +29,16 @@ export async function registerUser(formData) {
     // Hash the password securely
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create the new user with MEMBER role
+    // Determine role: make admin@mbss.mcu.ac.th an ADMIN automatically
+    const role = email === 'admin@mbss.mcu.ac.th' ? 'ADMIN' : 'MEMBER';
+
+    // Create the new user
     await prisma.user.create({
       data: {
         name,
         email,
         password: hashedPassword,
-        // Role defaults to MEMBER as per the Prisma schema
+        role: role,
       }
     });
 
