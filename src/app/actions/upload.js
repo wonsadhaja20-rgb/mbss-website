@@ -17,24 +17,24 @@ export async function uploadFile(formData) {
   }
 
   try {
-    // Determine file extension and generate a secure unique filename
+    // Check if token exists
     if (!process.env.BLOB_READ_WRITE_TOKEN) {
-      console.error('Missing BLOB_READ_WRITE_TOKEN! Please configure Vercel Settings.');
-      return { success: false, error: 'Database Token Missing: Please set BLOB_READ_WRITE_TOKEN in Vercel.' };
+      console.error('BLOB_READ_WRITE_TOKEN is missing in environment variables');
+      return { success: false, error: 'Cloud storage is not configured. Please add BLOB_READ_WRITE_TOKEN to Vercel environment variables.' };
     }
 
+    // Determine file extension and generate a secure unique filename
     const originalName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, '');
     const uniqueName = `mbss-uploads/${Date.now()}-${originalName}`;
 
     // Upload directly to Vercel Blob Storage
     const blob = await put(uniqueName, file, {
       access: 'public',
-      // Vercel blob will automatically use process.env.BLOB_READ_WRITE_TOKEN
     });
 
     return { success: true, url: blob.url };
   } catch (error) {
     console.error('Error uploading file to Vercel Blob:', error);
-    return { success: false, error: 'Failed to upload file to cloud storage.' };
+    return { success: false, error: `Upload failed: ${error.message}` };
   }
 }
