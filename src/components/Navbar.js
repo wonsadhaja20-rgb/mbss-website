@@ -16,7 +16,7 @@ export default async function Navbar() {
             <Image src="/logo.png" alt="MBSS Logo" width={50} height={50} className={styles.logoImage} />
             <div className={styles.logoTextWrapper}>
               <span className={styles.logoText}>MBSS</span>
-              <span className={styles.universityText}>Mahachulalongkornrajavidyalaya University</span>
+              <span className={styles.universityText}>Mon Buddhist Students Society</span>
             </div>
           </Link>
         </div>
