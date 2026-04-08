@@ -14,7 +14,10 @@
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(135deg, rgba(10, 25, 47, 0.9) 0%, rgba(104, 0, 0, 0.8) 100%);
+  /* Premium animated gradient mesh */
+  background: radial-gradient(circle at 20% 50%, rgba(26, 45, 84, 0.6) 0%, transparent 50%),
+              radial-gradient(circle at 80% 50%, rgba(122, 10, 25, 0.6) 0%, transparent 50%),
+              linear-gradient(135deg, rgba(14, 26, 53, 0.9) 0%, rgba(14, 26, 53, 0.95) 100%);
   z-index: 1;
 }
 
@@ -116,10 +119,10 @@
 
 .card {
   background: var(--color-white);
-  padding: 2rem;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
-  border: 1px solid rgba(0,0,0,0.03);
+  padding: 2.5rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0,0,0,0.04);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
@@ -129,16 +132,16 @@
   content: '';
   position: absolute;
   top: 0; left: 0; width: 4px; height: 100%;
-  background-color: var(--color-maroon);
+  background: linear-gradient(to bottom, var(--color-maroon), var(--color-gold));
   transform: scaleY(0);
   transition: transform 0.4s ease;
   transform-origin: bottom;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-xl);
-  border-color: rgba(0,0,0,0.05);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(0,0,0,0.08);
 }
 
 .card:hover::after {
@@ -171,20 +174,20 @@
 .eventCard {
   display: flex;
   background: var(--color-white);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-md);
-  border: 1px solid rgba(0,0,0,0.03);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0,0,0,0.04);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .eventCard:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-xl);
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
 }
 
 .eventDate {
-  background-color: var(--color-blue);
+  background: linear-gradient(135deg, var(--color-maroon) 0%, var(--color-maroon-dark) 100%);
   color: var(--color-white);
   padding: 1.5rem 1rem;
   text-align: center;
