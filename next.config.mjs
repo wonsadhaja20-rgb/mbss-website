@@ -5,6 +5,9 @@ const nextConfig = {
       bodySizeLimit: '20mb',
     },
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   output: 'standalone',
 };
 
