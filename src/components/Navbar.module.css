@@ -1,0 +1,160 @@
+.header {
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 1rem 0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logoContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.logoLink {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+  gap: 1rem;
+}
+
+.logoLink:hover {
+  text-decoration: none;
+}
+
+.logoImage {
+  object-fit: contain;
+}
+
+.logoTextWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.logoText {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-maroon);
+  line-height: 1.1;
+}
+
+.universityText {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--color-black);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.2rem;
+}
+
+.nav {
+  display: flex;
+}
+
+.navList {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+}
+
+.navLink {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-black);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  padding: 0.5rem 0;
+}
+
+.navLink:hover {
+  color: var(--color-maroon);
+  text-decoration: none;
+}
+
+.authNav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-left: 2rem;
+}
+
+.welcomeText {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-black);
+  font-weight: 600;
+}
+
+.dashboardLink {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  background-color: var(--color-gray-light);
+  color: var(--color-maroon);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.signOutBtn {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  background-color: transparent;
+  color: var(--color-red);
+  border: 1px solid var(--color-red);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.signOutBtn:hover {
+  background-color: var(--color-red);
+  color: white;
+}
+
+.registerBtn {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  background-color: var(--color-maroon);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.registerBtn:hover {
+  background-color: #7a1523;
+  color: white;
+}
+
+@media (max-width: 900px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .navList {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .authNav {
+    margin-left: 0;
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

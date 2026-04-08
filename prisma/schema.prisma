@@ -1,0 +1,140 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      String   @default("MEMBER") // "ADMIN", "EDITOR", or "MEMBER"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Article {
+  id            String   @id @default(cuid())
+  title         String
+  slug          String   @unique
+  author        String
+  category      String
+  featuredImage String?
+  content       String   // Rich text stored as HTML string
+  galleryImages String?  // JSON stringified array of URLs
+  publishDate   DateTime @default(now())
+  status        String   @default("DRAFT") // "DRAFT" or "PUBLISHED"
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Event {
+  id               String   @id @default(cuid())
+  title            String
+  description      String
+  date             DateTime
+  location         String
+  coverImage       String?
+  gallery          String?  // JSON stringified array of URLs
+  report           String?  // Rich text for the event report
+  status           String   @default("UPCOMING") // "UPCOMING", "PAST"
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model ResearchPaper {
+  id              String   @id @default(cuid())
+  title           String
+  author          String
+  abstract        String
+  category        String
+  pdfUrl          String
+  coverImage      String?
+  status          String   @default("PENDING") // "PENDING" or "PUBLISHED"
+  publishDate     DateTime @default(now())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Activity {
+  id            String   @id @default(cuid())
+  title         String
+  description   String
+  date          DateTime @default(now())
+  gallery       String?  // JSON stringified array of URLs
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Resource {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  fileUrl     String
+  category    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Publication {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  pdfUrl      String
+  publishDate DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Member {
+  id                String   @id @default(cuid())
+  name              String
+  photo             String?
+  programOfStudy    String?
+  yearOfStudy       String?
+  biography         String?
+  academicInterests String?
+  role              String?  // "Adviser", "President", "Member", etc.
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model Gallery {
+  id         String   @id @default(cuid())
+  albumTitle String
+  eventName  String?
+  images     String   // JSON stringified array of URLs
+  date       DateTime @default(now())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model SiteSetting {
+  id                    String   @id @default(cuid()) // We will just use one record with ID "singleton"
+  heroTitle             String   @default("Mon Buddhist Students Society")
+  heroDescription       String   @default("Academic student organization at Mahachulalongkornrajavidyalaya University.")
+  heroButtonLinks       String?  // JSON string representing links
+  heroImage             String?  // Optional uploaded background image
+  statsNumbers          String?  // JSON string { members: 0, events: 0, years: 0 }
+  homepageAnnouncements String?  // Rich text
+  featuredArticles      String?  // JSON stringified array of Article IDs
+  featuredEvents        String?  // JSON stringified array of Event IDs
+  
+  // Appended fields for the About Page CMS
+  aboutHistory          String?  
+  aboutMission          String?
+  aboutVision           String?
+  aboutAdvisors         String?  // JSON string array
+  aboutCommittee        String?  // JSON string array
+  
+  // Appended fields for the Homepage Welcome Section CMS
+  welcomeTitle          String?
+  welcomeText           String?
+  welcomeImage          String?
+  
+  updatedAt             DateTime @updatedAt
+}

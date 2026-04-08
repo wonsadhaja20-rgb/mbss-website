@@ -1,0 +1,225 @@
+.hero {
+  position: relative;
+  height: 80vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--color-white);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, rgba(10, 25, 47, 0.9) 0%, rgba(104, 0, 0, 0.8) 100%);
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.heroTitle {
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  color: var(--color-white);
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  letter-spacing: -0.02em;
+}
+
+.heroSubtitle {
+  font-size: 1.35rem;
+  font-weight: 300;
+  margin-bottom: 3rem;
+  line-height: 1.7;
+  opacity: 0.9;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.heroActions {
+  display: flex;
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 2.75rem;
+  }
+  .heroActions {
+    flex-direction: column;
+  }
+  .heroActions a {
+    text-align: center;
+  }
+}
+
+/* Intro Grid */
+.introGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.introText p {
+  margin-bottom: 1.25rem;
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+}
+
+.introImagePlaceholder {
+  background-color: var(--color-light-gray);
+  height: 450px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  box-shadow: var(--shadow-xl);
+}
+
+/* Two Column Layout */
+.twoColumnGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 4rem;
+}
+
+@media (max-width: 900px) {
+  .introGrid, .twoColumnGrid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+/* Cards */
+.cardList {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background: var(--color-white);
+  padding: 2rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(0,0,0,0.03);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 4px; height: 100%;
+  background-color: var(--color-maroon);
+  transform: scaleY(0);
+  transition: transform 0.4s ease;
+  transform-origin: bottom;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl);
+  border-color: rgba(0,0,0,0.05);
+}
+
+.card:hover::after {
+  transform: scaleY(1);
+}
+
+.card h3 {
+  font-size: 1.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.card h3 a {
+  color: var(--color-blue);
+}
+
+.card h3 a:hover {
+  color: var(--color-maroon);
+  text-decoration: none;
+}
+
+.meta {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.eventCard {
+  display: flex;
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(0,0,0,0.03);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.eventCard:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl);
+}
+
+.eventDate {
+  background-color: var(--color-blue);
+  color: var(--color-white);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  min-width: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.eventMonth {
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.eventDay {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.eventDetails {
+  padding: 1.5rem;
+}
+
+.eventDetails h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.eventDetails h3 a {
+  color: var(--color-black);
+}
+
+.eventDetails p {
+  font-size: 0.9rem;
+  color: #555;
+}
