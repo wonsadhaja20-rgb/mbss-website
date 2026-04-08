@@ -1,7 +1,6 @@
 'use server';
 
-import { writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
+import { put } from '@vercel/blob';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../api/auth/[...nextauth]/route';
 
@@ -17,30 +16,20 @@ export async function uploadFile(formData) {
     return { success: false, error: 'No file explicitly provided.' };
   }
 
-  const bytes = await file.arrayBuffer();
-  const buffer = Buffer.from(bytes);
-
-  // Santize file name, add timestamp to prevent collisions
-  const originalName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, '');
-  const uniqueName = `${Date.now()}-${originalName}`;
-  
-  const uploadDir = join(process.cwd(), 'public', 'uploads');
-  
-  // Ensure uploads directory exists
   try {
-    await mkdir(uploadDir, { recursive: true });
-  } catch (err) {
-    console.error('Error creating upload dir', err);
-  }
+    // Determine file extension and generate a secure unique filename
+    const originalName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, '');
+    const uniqueName = `mbss-uploads/${Date.now()}-${originalName}`;
 
-  const filePath = join(uploadDir, uniqueName);
+    // Upload directly to Vercel Blob Storage
+    const blob = await put(uniqueName, file, {
+      access: 'public',
+      // Vercel blob will automatically use process.env.BLOB_READ_WRITE_TOKEN
+    });
 
-  try {
-    await writeFile(filePath, buffer);
-    const fileUrl = `/uploads/${uniqueName}`;
-    return { success: true, url: fileUrl };
+    return { success: true, url: blob.url };
   } catch (error) {
-    console.error('Error writing file:', error);
-    return { success: false, error: 'Failed to write file to disk' };
+    console.error('Error uploading file to Vercel Blob:', error);
+    return { success: false, error: 'Failed to upload file to cloud storage.' };
   }
 }
