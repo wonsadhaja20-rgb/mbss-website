@@ -18,6 +18,11 @@ export async function uploadFile(formData) {
 
   try {
     // Determine file extension and generate a secure unique filename
+    if (!process.env.BLOB_READ_WRITE_TOKEN) {
+      console.error('Missing BLOB_READ_WRITE_TOKEN! Please configure Vercel Settings.');
+      return { success: false, error: 'Database Token Missing: Please set BLOB_READ_WRITE_TOKEN in Vercel.' };
+    }
+
     const originalName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, '');
     const uniqueName = `mbss-uploads/${Date.now()}-${originalName}`;
 
